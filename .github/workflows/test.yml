@@ -16,6 +16,6 @@ jobs:
         with:
           node-version: '18.x'
       - name: Install dependencies
-      - run: npm install
+        run: npm install
       - name: Run tests
-      - run: jest
+        run: jest
