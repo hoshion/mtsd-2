@@ -68,5 +68,4 @@ export class List {
   extend(elements: Array<string>): void {
     this.arr = [...this.arr, ...elements];
   }
-
 }
