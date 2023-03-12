@@ -1,8 +1,8 @@
 export class List {
   arr: Array<string>;
 
-  constructor () {
-    this.arr = [];
+  constructor (arr: Array<string> = []) {
+    this.arr = [...arr];
   }
 
   length(): number {
@@ -45,8 +45,8 @@ export class List {
     return this.arr[index];
   }
 
-  clone(): Array<string> {
-    return [...this.arr];
+  clone(): List {
+    return new List(this.arr);
   }
 
   reverse(): void {
