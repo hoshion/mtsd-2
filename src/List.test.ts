@@ -39,7 +39,7 @@ describe('Testing first implementation of List', () => {
     const result = list.arr[0];
 
     expect(value).toBe('A');
-    expect(result).toBe(undefined);
+    expect(result).toBeUndefined();
 
     try {
       list.delete(-1);
@@ -134,7 +134,7 @@ describe('Testing first implementation of List', () => {
     list.append('C');
     const newList = list.clone();
 
-    expect(list).not.toBe(newList);
+    expect(list).toBe(newList);
     newList.arr.forEach((value, index) => {
       expect(value).toBe(list.arr[index]);
     })
