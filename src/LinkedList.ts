@@ -47,7 +47,7 @@ export class LinkedList {
     if (index === this.length()) {
       this.append(element);
     } else {
-      const previous = this.get(index - 1);
+      const previous = this.getNode(index - 1);
       const next = previous.next;
       previous.next = new Node(element);
       previous.next.next = next;
@@ -65,13 +65,13 @@ export class LinkedList {
       value = (this.head as Node).value;
       this.head = null;
     } else if (index === 0) {
-      const last = this.get(this.length() - 1);
+      const last = this.getNode(this.length() - 1);
       const head = this.head as Node;
       value = head.value;
       this.head = head.next;
       last.next = this.head;
     } else {
-      const previous = this.get(index - 1);
+      const previous = this.getNode(index - 1);
       value = previous.next.value;
       previous.next = previous.next.next;
     }
@@ -87,7 +87,7 @@ export class LinkedList {
     }
   }
 
-  get(index: number): Node {
+  getNode(index: number): Node {
     if (index < 0 || index > this.length() - 1) {
       throw new Error('Invalid number');
     }
@@ -102,58 +102,72 @@ export class LinkedList {
     return current;
   }
 
+  get(index: number): string {
+    return this.getNode(index).value;
+  }
+
   clone(): LinkedList {
     const list = new LinkedList()
     if (this.head) {
       let counter = 0;
       let current = this.head;
-      while (counter < this.length()) {
+      const length = this.length();
+      while (counter < length) {
         list.append(current.value);
         current = current.next;
+        counter++;
       }
     }
     return list;
   }
 
   reverse(): void {
-    const last = this.get(this.length() - 1);
-    const newHead = new Node(last.value);
-    const current = newHead;
-    for (let i = this.length() - 2; i >= 0; i--) {
-      newHead.next = this.get(i);
+    if (!this.head) return;
+
+    const arr = this.getNodes()
+    const length = this.length();
+
+    for (let i = length - 1; i >= 1; i--) {
+      arr[i].next = arr[i - 1];
     }
-    current.next = newHead;
-    this.head = newHead;
+
+    arr[0].next = arr[length - 1];
+    this.head = arr[length - 1];
   }
 
   findFirst(element: string): number {
-    if (!this.head) return -1;
-    if (this.head.value === element) return 0;
+    const arr = this.getNodes();
 
-    let counter = 0;
-    let current = this.head;
-    while (current.value !== element && counter < this.length()) {
-      counter++;
-      current = current.next;
+    for (let i = 0; i < this.length(); i++) {
+      if (arr[i].value === element) return i;
     }
 
-    if (counter === 0) return -1;
-    else return counter;
+    return -1;
   }
 
   findLast(element: string): number {
-    if (!this.head) return -1;
-    if (this.get(this.length() - 1).value === element) return 0;
+    const arr = this.getNodes();
 
-    let counter = this.length() - 1;
-    let current = this.get(counter);
-    while (current.value !== element && counter >= 0) {
-      counter++;
+    for (let i = this.length() - 1; i >= 0; i--) {
+      if (arr[i].value === element) return i;
+    }
+
+    return -1;
+  }
+
+  private getNodes(): Array<Node> {
+    if (!this.head) return [];
+
+    const arr = [];
+    let current = this.head as Node;
+    const length = this.length();
+
+    for (let i = 0; i < length; i++) {
+      arr[i] = current;
       current = current.next;
     }
 
-    if (counter === this.length() - 1) return -1;
-    else return counter;
+    return arr;
   }
 
   clear() {
@@ -167,9 +181,9 @@ export class LinkedList {
     if (!this.head) {
       this.head = clone.head;
     } else {
-      const last = this.get(this.length() - 1);
+      const last = this.getNode(this.length() - 1);
       last.next = clone.head as Node;
-      clone.get(clone.length() - 1).next = this.head;
+      clone.getNode(clone.length() - 1).next = this.head;
     }
   }
 }
