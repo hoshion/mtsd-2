@@ -1,3 +1,5 @@
+import { ListI } from './List.interface';
+
 class Node {
   next: Node;
   value: string;
@@ -8,7 +10,7 @@ class Node {
   }
 }
 
-export class LinkedList {
+export class LinkedList implements ListI {
   head: Node | null;
 
   constructor () {
@@ -87,7 +89,7 @@ export class LinkedList {
     }
   }
 
-  getNode(index: number): Node {
+  private getNode(index: number): Node {
     if (index < 0 || index > this.length() - 1) {
       throw new Error('Invalid number');
     }

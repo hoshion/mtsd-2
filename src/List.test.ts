@@ -77,7 +77,7 @@ describe('Testing first implementation of List', () => {
     list.append('B');
     list.append('A');
 
-    list.extend(['B', 'C', 'D', 'A']);
+    list.extend(new List(['B', 'C', 'D', 'A']));
 
     expect(list.arr[4]).toBe('B');
     expect(list.arr[5]).toBe('C');

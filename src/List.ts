@@ -1,4 +1,6 @@
-export class List {
+import { ListI } from './List.interface';
+
+export class List implements ListI {
   arr: Array<string>;
 
   constructor (arr: Array<string> = []) {
@@ -65,7 +67,7 @@ export class List {
     this.arr.length = 0;
   }
 
-  extend(elements: Array<string>): void {
-    this.arr = [...this.arr, ...elements];
+  extend (elements: List): void {
+    this.arr = [...this.arr, ...elements.arr];
   }
 }
