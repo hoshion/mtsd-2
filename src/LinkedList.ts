@@ -11,7 +11,7 @@ class Node {
 export class LinkedList {
   head: Node | null;
 
-  constructor (arr: Array<string> = []) {
+  constructor () {
     this.head = null;
   }
 
@@ -122,54 +122,36 @@ export class LinkedList {
   }
 
   reverse(): void {
-    if (!this.head) return;
+    if (!this.head || this.length() === 1) return;
 
-    const arr = this.getNodes()
-    const length = this.length();
-
-    for (let i = length - 1; i >= 1; i--) {
-      arr[i].next = arr[i - 1];
+    const lastIndex = this.length() - 1;
+    const last = this.getNode(lastIndex);
+    const newHead = new Node(last.value);
+    let current = newHead;
+    for (let i = lastIndex - 1; i >= 0; i--) {
+      current.next = new Node(this.getNode(i).value);
+      current = current.next;
     }
 
-    arr[0].next = arr[length - 1];
-    this.head = arr[length - 1];
+    this.head = newHead;
+    current.next = this.head;
   }
 
   findFirst(element: string): number {
-    const arr = this.getNodes();
-
     for (let i = 0; i < this.length(); i++) {
-      if (arr[i].value === element) return i;
+      if (this.get(i) === element) return i;
     }
 
     return -1;
   }
 
   findLast(element: string): number {
-    const arr = this.getNodes();
-
     for (let i = this.length() - 1; i >= 0; i--) {
-      if (arr[i].value === element) return i;
+      if (this.get(i) === element) return i;
     }
 
     return -1;
   }
-
-  private getNodes(): Array<Node> {
-    if (!this.head) return [];
-
-    const arr = [];
-    let current = this.head as Node;
-    const length = this.length();
-
-    for (let i = 0; i < length; i++) {
-      arr[i] = current;
-      current = current.next;
-    }
-
-    return arr;
-  }
-
   clear() {
     this.head = null;
   }

@@ -1,5 +1,4 @@
 import { LinkedList } from './LinkedList';
-import { List } from './List';
 
 describe('Testing circular linked list', () => {
   test('Checking adding of head', () => {
@@ -179,6 +178,5 @@ describe('Testing circular linked list', () => {
     expect(list.get(2)).toBe('C');
     expect(list.get(3)).toBe('D');
   });
-
 
 });
