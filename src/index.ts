@@ -1,16 +1,8 @@
-import { List } from './List';
 import { ListI } from './List.interface';
 import { LinkedList } from './LinkedList';
 
-const TYPE: 'array' | 'list' = 'array';
-
 function main() {
-  let list: ListI;
-
-  switch (TYPE) {
-    case 'array': list = new List(); break;
-    case 'list': list = new LinkedList(); break;
-  }
+  let list: ListI = new LinkedList();
 
   const student = 'Шестеров Святослав Сергійович';
   for (const char of student) {
