@@ -1,6 +1,6 @@
 # Array and Linked list implementation
 
-Small application that have two implementations of List class (with the help of array and by node linking)
+Small application that have of List class with the help of node linking.
 
 ## Variant of the student
 
@@ -25,7 +25,12 @@ To run the tests, execute:
 npm run test
 ```
 
+## Failed test commit
 
-## Revert commit
+Commit hash is `19179c6`.
 
-The hash of the revert commit is `eefbe4b7`.
+## Are tests helped me?
+
+Недосвідченому програмісту писати тести не варто, оскільки сам тест вимагає професійного підходу до його створення (щоб не довелося тестити сам тест). Тести допомагають уніфікувати функціональність якогось методу, виразивши тестами відповідні очікування від методу. Завдяки тестам можна перевіряти чи був рефакторинг зроблений правильно і чи не робить він помилок (навіть коли розробник думає що все ок, все може бути не ок ;3).
+
+Загалом, я ще до першого курсу розумів важливість тестів, тому тут нема про що говорити. Хороші програми мають тести і дозволяють збільшити тривалість підтримки продукту.
